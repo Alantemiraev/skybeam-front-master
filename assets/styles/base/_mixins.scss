@@ -1,0 +1,27 @@
+@mixin mq($from, $to: false)
+{
+	@if $to {
+		@media (min-width: ($from + 0px)) and (max-width: ($to + 0px)) {
+			@content;
+		}
+	}
+
+	@else {
+		@media (min-width: ($from + 0px)) {
+			@content;
+		}
+	}
+}
+
+@mixin transition() { transition: .2s ease; }
+
+@mixin pr() {
+    overflow: hidden;
+    padding-right: var(--scrollbar-width);
+
+	.header-wr
+	{
+		max-width: calc(650px + var(--scrollbar-width));
+		padding-right: calc(var(--scrollbar-width) + 16px);
+	}
+}
