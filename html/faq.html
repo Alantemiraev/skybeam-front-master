@@ -1,0 +1,31 @@
+	<div class="faq">
+		<the-title :title="'Вопросы и ответы'" />
+		<the-tabs
+			v-if="Array.isArray(categories)"
+			:tabs="categories"
+			:selected="selectedCategories"
+			@changeSelected="handleSelect"
+		/>
+		<div
+			v-if="status !== 'pending' && Array.isArray(faqArray.data)"
+			class="faq__items faq__container"
+		>
+			<faq-category
+				v-for="(el, i) in faqArray.data"
+				:key="i"
+				:title="el.title"
+				:items="el.faqs"
+			/>
+		</div>
+		<div
+			v-else
+			class="faq__skeleton faq__container"
+		>
+			<div class="faq__skeleton-category">
+				<ui-skeleton />
+			</div>
+			<div class="faq__skeleton-items">
+				<ui-skeleton v-for="el in 5" :key="el" />
+			</div>
+		</div>
+	</div>
