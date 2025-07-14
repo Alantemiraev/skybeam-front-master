@@ -1,0 +1,30 @@
+    <div class="category">
+        <the-title :title="category.title" :description="category.description" />
+		<the-tabs
+			v-if="filters && filters.length"
+			:tabs="filters"
+			:selected="selectedFilters"
+			@changeSelected="handleSelect"
+		/>
+        <div class="container">
+            <div class="category__items">
+				<template v-if="items && items.length">
+					<product-card
+						v-for="el in items"
+						:key="el.id"
+						:img="el.img"
+						:title="el.title"
+						:slug="el.slug"
+						:description="el.description"
+					/>
+				</template>
+				<template v-if="isLoading">
+					<ui-skeleton v-for="el in 6" :key="el" />
+				</template>
+            </div>
+			<div v-if="!isLoading" ref="paginationRef" class="category__observer" />
+        </div>
+		<h3 v-if="items && !items.length && !isLoading" class="category__empty">
+			В этой категории пока нет товаров.
+		</h3>
+    </div>
